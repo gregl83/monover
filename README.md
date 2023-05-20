@@ -8,7 +8,7 @@ Monorepository Versioning Agent
 
 ### Historical Version Log
 
-[https://github.com/capnproto/capnproto-rust](Cap'n Proto)
+[Cap'n Proto](https://github.com/capnproto/capnproto-rust)
 
 ### Supported Version Schemes
 
