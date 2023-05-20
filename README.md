@@ -4,6 +4,8 @@ Monorepository Versioning Agent
 
 ## Features
 
+### Version Validations
+
 ### Automatic Root Versioning
 
 ### Historical Version Log
@@ -16,8 +18,11 @@ Monorepository Versioning Agent
 
 ### Multilingual Version Fluency
 
+- Generic VERSION
 - NodeJs package.json
 - Rust cargo.toml
+- Python setup.cfg or setup.py
+- Ruby .gemspec
 
 ## License
 
