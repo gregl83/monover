@@ -36,15 +36,34 @@ Blazing fast intelligent [monorepo](https://github.com/gregl83/monorepo) continu
 - Python
   - setup.cfg
   - setup.py
+- Java
+  - pom.xml
+  - build.gradle
 - Scala
   - build.sbt
+- Swift
+  - Package.swift
+- Dart
+  - pubspec.yaml
 - C#
   - .csproj
   - .nuspec
 - Haskell
   - .cabal
+- Kotlin
+  - build.gradle.kts
+- R
+  - DESCRIPTION
+- Lua
+  - .rockspec
 - PHP
   - composer.json
+- Perl
+  - Makefile.PL
+  - Build.PL
+  - META.yml
+- Erlang
+  - rebar.config
 - Ruby
   - .gemspec
 - Elixir
