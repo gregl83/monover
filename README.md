@@ -25,11 +25,30 @@ Blazing fast intelligent [monorepo](https://github.com/gregl83/monorepo) continu
 
 ### Multilingual Version Fluency
 
-- Generic VERSION
-- NodeJs package.json
-- Rust cargo.toml
-- Python setup.cfg or setup.py
-- Ruby .gemspec
+- Generic
+  - VERSION
+- Go
+  - go.mod
+- NodeJs
+  - package.json
+- Rust
+  - cargo.toml
+- Python
+  - setup.cfg
+  - setup.py
+- Scala
+  - build.sbt
+- C#
+  - .csproj
+  - .nuspec
+- Haskell
+  - .cabal
+- PHP
+  - composer.json
+- Ruby
+  - .gemspec
+- Elixir
+  - mix.exs
 
 ## License
 
