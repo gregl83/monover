@@ -1,8 +1,13 @@
+[![.github/workflows/build.yml](https://github.com/gregl83/monover/actions/workflows/build.yml/badge.svg)](https://github.com/gregl83/monover/actions/workflows/build.yml)
 # monover
 
 Monorepository Versioning Agent
 
 ## Features
+
+### Parallelized Repository Scans
+
+[Rust Rayon](https://github.com/rayon-rs/rayon)
 
 ### Version Validations
 
