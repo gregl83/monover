@@ -103,7 +103,7 @@ These are special files that have three main functions:
 
 - Version repository (auto-generated).
 - Version repository packages (overrides version file matches).
-- Settle ambiguous, more than one version file match, package versions.
+- Settle version ambiguity (1 < version file match).
 
 The format for `VERSION` files is a simple double quoted string. They are valid JSON files without file extensions.
 
