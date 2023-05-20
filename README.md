@@ -21,7 +21,7 @@ Repository versions are automatically derived from package versions.
 
 Keeps track of versions to validate new target versions and perform state audits.
 
-Version Log uses [Cap'n Proto](https://github.com/capnproto/capnproto-rust) file format.
+Version Log uses Rust implementation of the [Cap'n Proto](https://github.com/capnproto/capnproto-rust) message format.
 
 ### Supported Version Schemes
 
