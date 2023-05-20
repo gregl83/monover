@@ -4,7 +4,7 @@ Monorepository Versioning Agent
 
 ## Version Schemes
 
-- [semver](https://semver.org/)
+- [Semantic Versioning](https://semver.org/)
 
 ## License
 
