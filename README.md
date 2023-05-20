@@ -95,6 +95,23 @@ Supports versioning of repository packages using standard package management con
 - Idris
   - elba.toml
 
+## Concepts
+
+### VERSION Files
+
+These are special files that have three main functions:
+
+- Version repository (auto-generated).
+- Version repository packages (overrides version file matches).
+- Settle ambiguous, more than one version file match, package versions.
+
+The format for `VERSION` files is a simple double quoted string. They are valid JSON files without file extensions.
+
+There are two possible values for the `VERSION` file string:
+
+- Valid value for Versioning Scheme.
+- Key of version file to use.
+
 ## License
 
 [MIT](LICENSE)
