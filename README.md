@@ -3,7 +3,7 @@
 
 Mono-Repository Versioning Agent.
 
-Blazing fast intelligent [monorepo](https://github.com/gregl83/monorepo) Agent.
+Blazing fast intelligent [monorepo](https://github.com/gregl83/monorepo) continuous integration agent.
 
 ## Features
 
