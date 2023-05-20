@@ -33,6 +33,9 @@ Blazing fast intelligent [monorepo](https://github.com/gregl83/monorepo) continu
   - package.json
 - Rust
   - cargo.toml
+- C++
+  - conanfile.py
+  - conanfile.txt
 - Python
   - setup.cfg
   - setup.py
@@ -45,6 +48,10 @@ Blazing fast intelligent [monorepo](https://github.com/gregl83/monorepo) continu
   - Package.swift
 - Dart
   - pubspec.yaml
+- Clojure
+  - project.clj
+- F#
+  - paket.dependencies
 - C#
   - .csproj
   - .nuspec
@@ -56,18 +63,31 @@ Blazing fast intelligent [monorepo](https://github.com/gregl83/monorepo) continu
   - DESCRIPTION
 - Lua
   - .rockspec
+- OCaml
+  - .opam
+  - opam
 - PHP
   - composer.json
 - Perl
   - Makefile.PL
   - Build.PL
   - META.yml
+- Julia
+  - Project.toml
+- Crystal
+  - shard.yml
+- Nim
+  - .nimble
 - Erlang
   - rebar.config
 - Ruby
   - .gemspec
 - Elixir
   - mix.exs
+- Elm
+  - elm.json
+- Idris
+  - elba.toml
 
 ## License
 
