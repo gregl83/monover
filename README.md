@@ -97,6 +97,16 @@ Supports versioning of repository packages using standard package management con
 
 ## Concepts
 
+### CHANGE Files
+
+These files are used for monover to decide how to increment package version files.
+
+Example:
+
+```json
+"major"
+```
+
 ### VERSION Files
 
 These are special files that have three main functions:
