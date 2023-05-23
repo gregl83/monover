@@ -1,0 +1,112 @@
+{
+  "*": [
+    "VERSION"
+  ],
+  "autotools": [
+    "configure.ac",
+    "configure.in",
+    "configure"
+  ],
+  "c": [
+    "version.h"
+  ],
+  "c#": [
+    ".csproj",
+    ".nuspec"
+  ],
+  "c++": [
+    "conanfile.py",
+    "conanfile.txt"
+  ],
+  "clojure": [
+    "project.clj"
+  ],
+  "cmake": [
+    "CMakeLists.txt"
+  ],
+  "crystal": [
+    "shard.yml"
+  ],
+  "dart": [
+    "pubspec.yaml"
+  ],
+  "elixir": [
+    "mix.exs"
+  ],
+  "elm": [
+    "elm.json"
+  ],
+  "erlang": [
+    "rebar.config"
+  ],
+  "go": [
+    "go.mod"
+  ],
+  "haskell": [
+    ".cabal"
+  ],
+  "idris": [
+    "ipkg"
+  ],
+  "f#" : [
+    "paket.dependencies"
+  ],
+  "java": [
+    "pom.xml",
+    "build.gradle"
+  ],
+  "julia": [
+    "Project.toml"
+  ],
+  "kotlin": [
+    "build.gradle.kts"
+  ],
+  "lua": [
+    ".rockspec"
+  ],
+  "makefile": [
+    "Makefile",
+    "Makefile.am"
+  ],
+  "meson": [
+    "meson.build"
+  ],
+  "nim": [
+    ".nimble"
+  ],
+  "nodejs": [
+    "package.json"
+  ],
+  "ocaml": [
+    ".opam",
+    "opam"
+  ],
+  "perl": [
+    "Makefile.PL",
+    "Build.PL",
+    "META.yml"
+  ],
+  "php": [
+    "composer.json"
+  ],
+  "python": [
+    "setup.cfg",
+    "setup.py"
+  ],
+  "r": [
+    "DESCRIPTION"
+  ],
+  "ruby": [
+    "Gemfile",
+    ".gemspec"
+  ],
+  "rust": [
+    "cargo.toml"
+  ],
+  "scala": [
+    "build.sbt"
+  ],
+  "swift": [
+    "Package.swift"
+  ]
+}

@@ -31,80 +31,34 @@ Version Log uses Rust implementation of the [Cap'n Proto](https://github.com/cap
 
 Supports versioning of repository packages using standard package management configuration files. 
 
-- Generic
-  - VERSION
-- Go
-  - go.mod
-- NodeJs
-  - package.json
-- Rust
-  - cargo.toml
-- C++
-  - conanfile.py
-  - conanfile.txt
-- Python
-  - setup.cfg
-  - setup.py
-- Java
-  - pom.xml
-  - build.gradle
-- Scala
-  - build.sbt
-- Swift
-  - Package.swift
-- Dart
-  - pubspec.yaml
-- Clojure
-  - project.clj
-- F#
-  - paket.dependencies
-- C#
-  - .csproj
-  - .nuspec
-- Haskell
-  - .cabal
-- Kotlin
-  - build.gradle.kts
-- R
-  - DESCRIPTION
-- Lua
-  - .rockspec
-- OCaml
-  - .opam
-  - opam
-- PHP
-  - composer.json
-- Perl
-  - Makefile.PL
-  - Build.PL
-  - META.yml
-- Julia
-  - Project.toml
-- Crystal
-  - shard.yml
-- Nim
-  - .nimble
-- Erlang
-  - rebar.config
-- Ruby
-  - .gemspec
-- Elixir
-  - mix.exs
-- Elm
-  - elm.json
-- Idris
-  - elba.toml
+See [target.json](targets.json) for complete list of supported files.
+
+Cannot find your favorite package manager? Open an [issue](https://github.com/gregl83/monover/issues/new) to request support.
 
 ## Concepts
 
 ### CHANGE Files
 
-These files are used for monover to decide how to increment package version files.
+These files are used for `monover` to decide how to increment package version files.
 
-Example:
-
+####  Major
 ```json
 "major"
+```
+
+#### Minor
+```json
+"minor"
+```
+
+#### Patch
+```json
+"patch"
+```
+
+#### Pre-Release
+```json
+"<major|minor>-<pre-release-name>"
 ```
 
 ### VERSION Files
