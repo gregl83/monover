@@ -1,7 +1,7 @@
 [![.github/workflows/build.yml](https://github.com/gregl83/monover/actions/workflows/build.yml/badge.svg)](https://github.com/gregl83/monover/actions/workflows/build.yml)
 # monover
 
-Blazing fast intelligent [monorepo](https://github.com/gregl83/monorepo) continuous integration versioning.
+Blazing fast intelligent [monorepo](https://monorepo.tools/) continuous integration versioning.
 
 ## Features
 
