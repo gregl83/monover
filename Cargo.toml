@@ -20,7 +20,7 @@ path = "src/bin.rs"
 arrayvec = "0.7.2"
 walkdir = "2.3.2"
 rayon = "1.5"
-clap = "2.34.0"
+clap = {"version" = "4.0.0", features = ["cargo"]}
 
 [features]
 default = ["test-cleanup"]

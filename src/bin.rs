@@ -5,27 +5,40 @@
 //! cargo run -- -h
 //! ```
 
-use clap::{App, Arg};
+use std::unreachable;
+use clap::{
+    crate_name,
+    crate_description,
+    crate_version,
+    arg,
+    Command
+};
+
+fn cli() -> Command {
+    Command::new(crate_name!())
+        .version(crate_version!())
+        .about(crate_description!())
+        .subcommand_required(true)
+        .arg_required_else_help(true)
+        .allow_external_subcommands(false)
+        .subcommand(
+            Command::new("reconcile")
+                .about("Reconcile CHANGE files to versions in repository")
+                .arg(arg!(<REPOSITORY> "Path to repository"))
+                .arg_required_else_help(true),
+        )
+}
 
 fn main() {
-    // todo - add error handling with messaging
+    let matches = cli().get_matches();
 
-    let _matches = App::new("monover")
-        .version("0.1.0")
-        .about("Blazing fast intelligent monorepo continuous integration versioning.")
-        // .arg(Arg::with_name("src")
-        //     .help("Source to hash (filesystem path)")
-        //     .default_value(".")
-        //     .index(1))
-        // .arg(Arg::with_name("ignore-hidden")
-        //     .help("Ignore files or directories starting with dot or full stop")
-        //     .long("ignore-hidden")
-        //     .short("i")
-        // )
-        .get_matches();
-
-    // let source = matches.value_of("src").unwrap();
-    // let ignore_hidden = matches.is_present("ignore-hidden");
-    //let hash = hash_source(source, ignore_hidden);
-    //println!("{}", hash);
+    match matches.subcommand() {
+        Some(("reconcile", sub_matches)) => {
+            println!(
+                "Cloning {}",
+                sub_matches.get_one::<String>("REPOSITORY").expect("required")
+            );
+        }
+        _ => unreachable!(),
+    }
 }
