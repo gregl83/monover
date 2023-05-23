@@ -69,12 +69,25 @@ These are special files that have three main functions:
 - Version repository packages (overrides version file matches).
 - Settle version ambiguity (1 < version file match).
 
-The format for `VERSION` files is a simple double quoted string. They are valid JSON files without file extensions.
+The format for `VERSION` files is a simple double-quoted string. They are valid JSON files without file extensions.
 
-There are two possible values for the `VERSION` file string:
+There are two possible values for the `VERSION` file string.
 
-- Valid value for Versioning Scheme.
-- Key of version file to use.
+#### Versioning Scheme Version
+
+```json
+"1.0.0"
+```
+
+#### Version File Key
+
+Must match a file key in [target.json](targets.json).
+
+```json
+"cargo.toml"
+```
+
+Use this option for version ambiguity due to multiple files in [target.json](targets.json) found in single package.
 
 ## License
 
