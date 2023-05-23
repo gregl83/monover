@@ -3,6 +3,10 @@
 
 Blazing fast intelligent [monorepo](https://monorepo.tools/) continuous integration versioning.
 
+## State
+
+In-Development - Estimate 1-2 Week Completion or 1st week of June
+
 ## Features
 
 ### Parallelized Repository Scans
