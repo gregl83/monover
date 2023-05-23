@@ -1,0 +1,27 @@
+[package]
+name = "monover"
+version = "0.1.0"
+authors = ["Gregory Langlais <general@gregorylanglais.com>"]
+edition = "2021"
+description = "Blazing fast intelligent monorepo continuous integration versioning."
+license = "MIT"
+readme = "README.md"
+keywords = ["monorepo", "versioning", "semver", "automation"]
+repository = "https://github.com/gregl83/monorepo"
+homepage = "https://crates.io/crates/monorepo"
+
+[[bin]]
+name = "monover"
+path = "src/bin.rs"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+arrayvec = "0.7.2"
+walkdir = "2.3.2"
+rayon = "1.5"
+clap = "2.34.0"
+
+[features]
+default = ["test-cleanup"]
+test-cleanup = []
