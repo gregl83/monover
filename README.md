@@ -1,4 +1,7 @@
 [![.github/workflows/build.yml](https://github.com/gregl83/monover/actions/workflows/build.yml/badge.svg)](https://github.com/gregl83/monover/actions/workflows/build.yml)
+[![Crates.io](https://img.shields.io/crates/v/monover.svg)](https://crates.io/crates/monover)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/gregl83/monover/blob/master/LICENSE)
+
 # monover
 
 Blazing fast intelligent [monorepo](https://monorepo.tools/) continuous integration versioning.
