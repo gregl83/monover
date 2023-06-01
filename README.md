@@ -88,13 +88,13 @@ There are two possible values for the `VERSION` file string.
 
 #### Version File Key
 
-Must match a file key in [target.json](targets.json).
+Must match a file key in [targets.json](targets.json).
 
 ```json
 "cargo.toml"
 ```
 
-Use this option for version ambiguity due to multiple files in [target.json](targets.json) found in single package.
+Use this option for version ambiguity due to multiple files in [targets.json](targets.json) found in single package.
 
 ## License
 
