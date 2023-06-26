@@ -7,12 +7,8 @@ description = "Blazing fast intelligent monorepo continuous integration versioni
 license = "MIT"
 readme = "README.md"
 keywords = ["monorepo", "versioning", "semver", "automation"]
-repository = "https://github.com/gregl83/monorepo"
-homepage = "https://crates.io/crates/monorepo"
-
-[[bin]]
-name = "monover"
-path = "src/bin.rs"
+repository = "https://github.com/gregl83/monover"
+homepage = "https://crates.io/crates/monover"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
