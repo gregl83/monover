@@ -5,6 +5,7 @@
 //! cargo run -- -h
 //! ```
 
+use std::collections::HashMap;
 use std::unreachable;
 use clap::{
     crate_name,
@@ -23,6 +24,36 @@ use std::path::PathBuf;
 pub use arrayvec::ArrayString;
 use rayon::prelude::*;
 use walkdir::{WalkDir, DirEntry};
+
+/// Abstraction of package with paths to key files for versioning.
+pub struct Package {
+    version_file_path: PathBuf,
+    change_file_path: PathBuf,
+    package_file_paths: Vec<PathBuf>,
+}
+
+/// Repository of packages to version.
+pub struct Repository {
+    root: PathBuf,
+    packages: HashMap<String, Package>,
+}
+
+impl Repository {
+    fn new(root: PathBuf) -> Self {
+        Self {
+            root,
+            packages: HashMap::new(),
+        }
+    }
+}
+
+fn is_reserved_file(file_name: &str) -> bool {
+    file_name == "CHANGE" || file_name == "VERSION"
+}
+
+fn is_package_file(_file_name: &str) -> bool {
+    false
+}
 
 #[derive(Copy, Clone, Debug)]
 #[non_exhaustive]
@@ -86,7 +117,10 @@ fn get_paths(root: &PathBuf, ignore_hidden: bool) -> Vec<PathBuf> {
             |mut acc, entry| {
                 match entry {
                     Ok(entry) => {
-                        acc.push(entry.into_path());
+                        let file_name = entry.file_name().to_str().unwrap();
+                        if is_reserved_file(file_name) || is_package_file(file_name) {
+                            acc.push(entry.into_path());
+                        }
                     },
                     _ => {}
                 }
@@ -125,11 +159,17 @@ fn cli() -> Command {
 fn main() {
     let matches = cli().get_matches();
 
+    // commands:
+    //   - reconcile - updates ALL versions while removing CHANGE files
+    //   - publish - version control based commit, tag and push
+
     match matches.subcommand() {
         Some(("reconcile", sub_matches)) => {
-            let repository = sub_matches.get_one::<PathBuf>("repository").expect("required");
-            let mut paths = get_paths(repository, true);
-            paths.sort_unstable();
+            let repository_root = sub_matches.get_one::<PathBuf>("repository").expect("required");
+
+            let mut paths = get_paths(repository_root, true);
+
+
 
             // todo - search for CHANGE and VERSION files
 
