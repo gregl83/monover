@@ -26,24 +26,61 @@ use rayon::prelude::*;
 use walkdir::{WalkDir, DirEntry};
 
 /// Abstraction of package with paths to key files for versioning.
+#[derive(Clone, Debug)]
+#[non_exhaustive]
 pub struct Package {
-    version_file_path: PathBuf,
-    change_file_path: PathBuf,
+    version_file_path: Option<PathBuf>,
+    change_file_path: Option<PathBuf>,
     package_file_paths: Vec<PathBuf>,
 }
 
+impl Package {
+    fn new() -> Self {
+        Self {
+            version_file_path: None,
+            change_file_path: None,
+            package_file_paths: Vec::new(),
+        }
+    }
+}
+
 /// Repository of packages to version.
+#[derive(Clone, Debug)]
+#[non_exhaustive]
 pub struct Repository {
     root: PathBuf,
     packages: HashMap<String, Package>,
 }
 
 impl Repository {
-    fn new(root: PathBuf) -> Self {
+    fn new(root: PathBuf, paths: Vec<PathBuf>) -> Self {
         Self {
             root,
-            packages: HashMap::new(),
+            packages: Self::parse_paths(paths),
         }
+    }
+
+    fn parse_paths(paths: Vec<PathBuf>) -> HashMap<String, Package> {
+        let mut packages = HashMap::new();
+        for path in paths {
+            let package_path = path.parent().unwrap();
+            let file_name = path.file_name().unwrap().to_str().unwrap();
+            let package = packages.entry(
+                package_path.to_str().unwrap().to_string()
+            ).or_insert_with(|| Package::new());
+            match file_name {
+                "VERSION" => {
+                    package.version_file_path = Some(path);
+                }
+                "CHANGE" => {
+                    package.change_file_path = Some(path);
+                }
+                _ => {
+                    package.package_file_paths.push(path);
+                }
+            }
+        }
+        packages
     }
 }
 
@@ -165,13 +202,26 @@ fn main() {
 
     match matches.subcommand() {
         Some(("reconcile", sub_matches)) => {
-            let repository_root = sub_matches.get_one::<PathBuf>("repository").expect("required");
+            let repository_root = sub_matches.get_one::<PathBuf>(
+                "repository"
+            ).expect("required");
 
-            let mut paths = get_paths(repository_root, true);
+            let mut paths = get_paths(
+                repository_root,
+                true
+            );
+
+            let repository = Repository::new(
+                repository_root.clone(),
+                paths
+            );
+
+            // for each package in repository:
+            //   - find CHANGE and VERSION files
+            //   - find package files
 
 
-
-            // todo - search for CHANGE and VERSION files
+            println!("{:?}", repository);
 
             // todo - match CHANGE and VERSION files to package files
 
@@ -183,11 +233,6 @@ fn main() {
             // todo -   remove CHANGE files
 
             // todo - confirm complete and report
-
-            println!(
-                "paths {:?}",
-                paths
-            );
         }
         _ => unreachable!(),
     }
