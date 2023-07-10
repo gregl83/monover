@@ -6,6 +6,8 @@
 //! ```
 
 use std::collections::HashMap;
+use std::error::Error;
+use std::fmt;
 use std::unreachable;
 use clap::{
     crate_name,
@@ -24,6 +26,23 @@ use std::path::PathBuf;
 pub use arrayvec::ArrayString;
 use rayon::prelude::*;
 use walkdir::{WalkDir, DirEntry};
+
+#[derive(Debug)]
+enum ReconciliationError {
+    IoError,
+    ParseError,
+}
+
+impl fmt::Display for ReconciliationError {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            Self::IoError => write!(f, "I/O error"),
+            Self::ParseError => write!(f, "Parse error"),
+        }
+    }
+}
+
+impl Error for ReconciliationError {}
 
 /// Abstraction of package with paths to key files for versioning.
 #[derive(Clone, Debug)]
@@ -65,6 +84,10 @@ impl Repository {
         for path in paths {
             let package_path = path.parent().unwrap();
             let file_name = path.file_name().unwrap().to_str().unwrap();
+            let package_version_file_path = package_path.join("VERSION");
+            if path == package_version_file_path {
+                continue;
+            }
             let package = packages.entry(
                 package_path.to_str().unwrap().to_string()
             ).or_insert_with(|| Package::new());
@@ -81,6 +104,22 @@ impl Repository {
             }
         }
         packages
+    }
+
+    fn reconcile(self) -> Result<(), ReconciliationError> {
+        for package in self.packages.values() {
+            if package.change_file_path.is_none() {
+                continue;
+            }
+            // todo - if there is a version file, decide if you use a package file or not
+            if package.version_file_path.is_none() {
+                // todo - process package file
+                continue;
+            }
+            // todo -
+            println!("{:?}", package);
+        }
+        Ok(())
     }
 }
 
@@ -216,12 +255,13 @@ fn main() {
                 paths
             );
 
+            let _result = repository.reconcile();
+
+            // validation - version file should exist
+
             // for each package in repository:
             //   - find CHANGE and VERSION files
             //   - find package files
-
-
-            println!("{:?}", repository);
 
             // todo - match CHANGE and VERSION files to package files
 
