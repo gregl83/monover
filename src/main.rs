@@ -13,19 +13,18 @@ use clap::{
     crate_name,
     crate_description,
     crate_version,
-    arg,
     builder::TypedValueParser,
     error::ErrorKind,
     error::ContextKind,
     error::ContextValue,
     Command,
-    Arg,
-    ArgAction
+    Arg
 };
 use std::path::PathBuf;
-pub use arrayvec::ArrayString;
 use rayon::prelude::*;
 use walkdir::{WalkDir, DirEntry};
+
+mod package_managers;
 
 #[derive(Debug)]
 enum ReconciliationError {
@@ -68,6 +67,9 @@ impl Package {
 #[non_exhaustive]
 pub struct Repository {
     root: PathBuf,
+
+    package_managers: Vec<Box<dyn package_managers::PackageConfiguration>>,
+
     packages: HashMap<String, Package>,
 }
 
@@ -245,17 +247,22 @@ fn main() {
                 "repository"
             ).expect("required");
 
-            let mut paths = get_paths(
+            let paths = get_paths(
                 repository_root,
                 true
             );
 
             let repository = Repository::new(
+                package_managers::Collection::new(),
                 repository_root.clone(),
                 paths
             );
 
-            let _result = repository.reconcile();
+            println!("{:?}", repository);
+
+            let result = repository.reconcile();
+
+            println!("{:?}", result);
 
             // validation - version file should exist
 
