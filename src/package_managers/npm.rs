@@ -1,15 +1,20 @@
-struct PackageJson {
-    _file_name: &str,
+use regex::Regex;
+use self::super::PackageConfiguration;
+
+pub(crate) struct PackageJson {
+    _file_pattern: Regex,
 }
 
 impl PackageJson {
-    fn new() -> Self {
+    pub(crate) fn new() -> Self {
         Self {
-            _file_name: "package.json",
+            _file_pattern: Regex::new(r"package\.json").unwrap()
         }
     }
+}
 
-    fn get_file_name(&self) -> String {
-        String::from(self.name)
+impl PackageConfiguration for PackageJson {
+    fn is_file_match(&self, file_name: &str) -> bool {
+        self._file_pattern.is_match(file_name)
     }
 }

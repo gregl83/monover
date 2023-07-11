@@ -1,33 +1,30 @@
 mod npm;
 
-use std::collections::HashMap;
-
 pub(crate) trait PackageConfiguration {
-    fn get_file_name(&self) -> String;
+    fn is_file_match(&self, file_name: &str) -> bool;
 }
 
-type Managers = HashMap<String, Box<dyn PackageConfiguration>>;
+type Managers = Vec<Box<dyn PackageConfiguration>>;
 
 pub(crate) struct Collection {
     managers: Managers
 }
 
 impl Collection {
-    fn construct_managers() -> Managers {
-        let mut managers = HashMap::new();
-
-        fn add_manager(managers: &mut Managers, manager: Box<dyn PackageConfiguration>) {
-            managers.insert(manager.get_file_name(), manager);
-        }
-
-        add_manager(&mut managers, Box::new(nodejs::PackageJson::new()));
-
-        managers
-    }
-
     pub fn new() -> Self {
         Self {
-            managers: Self::construct_managers()
+            managers: vec![
+                Box::new(npm::PackageJson::new())
+            ]
         }
+    }
+
+    pub fn has_file_match(&self, file_name: &str) -> bool {
+        for package_configuration in self.managers.iter() {
+            if package_configuration.is_file_match(&file_name) {
+                return true;
+            }
+        }
+        false
     }
 }

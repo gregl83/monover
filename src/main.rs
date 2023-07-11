@@ -65,18 +65,17 @@ impl Package {
 /// Repository of packages to version.
 #[derive(Clone, Debug)]
 #[non_exhaustive]
-pub struct Repository {
+pub struct Repository<'a> {
     root: PathBuf,
-
-    package_managers: Vec<Box<dyn package_managers::PackageConfiguration>>,
-
+    managers: &'a package_managers::Collection,
     packages: HashMap<String, Package>,
 }
 
-impl Repository {
-    fn new(root: PathBuf, paths: Vec<PathBuf>) -> Self {
+impl<'a> Repository<'a> {
+    fn new(root: PathBuf, managers: &package_managers::Collection, paths: Vec<PathBuf>) -> Self {
         Self {
             root,
+            managers,
             packages: Self::parse_paths(paths),
         }
     }
@@ -127,10 +126,6 @@ impl Repository {
 
 fn is_reserved_file(file_name: &str) -> bool {
     file_name == "CHANGE" || file_name == "VERSION"
-}
-
-fn is_package_file(_file_name: &str) -> bool {
-    false
 }
 
 #[derive(Copy, Clone, Debug)]
@@ -184,7 +179,12 @@ fn filter(ignore_hidden: bool) -> impl FnMut(&DirEntry) -> bool {
     }
 }
 
-fn get_paths(root: &PathBuf, ignore_hidden: bool) -> Vec<PathBuf> {
+fn get_paths(
+    root: &PathBuf,
+    managers: &package_managers::Collection,
+    ignore_hidden: bool
+) -> Vec<PathBuf> {
+    // todo - fix thread reference in objects
     WalkDir::new(root)
         .follow_links(false)
         .into_iter()
@@ -196,7 +196,7 @@ fn get_paths(root: &PathBuf, ignore_hidden: bool) -> Vec<PathBuf> {
                 match entry {
                     Ok(entry) => {
                         let file_name = entry.file_name().to_str().unwrap();
-                        if is_reserved_file(file_name) || is_package_file(file_name) {
+                        if is_reserved_file(file_name) || managers.has_file_match(file_name) {
                             acc.push(entry.into_path());
                         }
                     },
@@ -247,14 +247,17 @@ fn main() {
                 "repository"
             ).expect("required");
 
+            let managers = package_managers::Collection::new();
+
             let paths = get_paths(
                 repository_root,
+                &managers,
                 true
             );
 
             let repository = Repository::new(
-                package_managers::Collection::new(),
                 repository_root.clone(),
+                &managers,
                 paths
             );
 
