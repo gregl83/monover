@@ -8,7 +8,7 @@ Blazing fast intelligent [monorepo](https://monorepo.tools/) continuous integrat
 
 ## State
 
-In-Development - Estimate 1-2 Week Completion or 1st week of July
+In-Development of Beta
 
 ## Features
 
@@ -23,12 +23,6 @@ Package versions are validated to prevent duplicate target versions and variance
 ### Automatic Repository Versioning
 
 Repository versions are automatically derived from package versions.
-
-### Historical Version Log
-
-Keeps track of versions to validate new target versions and perform state audits.
-
-Version Log uses Rust implementation of the [Cap'n Proto](https://github.com/capnproto/capnproto-rust) message format.
 
 ### Supported Version Schemes
 
